@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Registration</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div class="container">
+        <h1>Seller Registration</h1>
+        <form action="{{ url_for('register_seller') }}" method="POST">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="company">Organization/Company:</label> <!-- Changed the input name to 'company' -->
+                <input type="text" id="company" name="company" required> <!-- Use 'company' here -->
+            </div>
+            <div class="form-group">
+                <label for="company_email">Company Email:</label>
+                <input type="email" id="company_email" name="company_email" required>
+            </div>
+            <div class="form-group">
+                <label for="product_type">Type of Products:</label>
+                <input type="text" id="product_type" name="product_type" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label> <!-- Added the password field -->
+                <input type="password" id="password" name="password" required> <!-- Ensure password is included -->
+            </div>
+            <!-- Add more fields related to sellers here if needed -->
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</body>
+</html>

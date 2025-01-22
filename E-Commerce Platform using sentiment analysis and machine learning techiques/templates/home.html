@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exploring E-Commerce Product Experience Sentiment Analyzer</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .header-section {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+        }
+        .content-section {
+            padding: 40px 0;
+        }
+        .about-section, .analysis-section {
+            padding-bottom: 20px;
+        }
+        .contact-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header-section">
+        <h1>WELCOME TO EXPLORING E-COMMERCE PRODUCT EXPERIENCE SENTIMENT ANALYZER</h1>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="/">Home</a>
+                <a class="nav-item nav-link" href="/login">Login</a>
+            </div>
+        </nav>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <p>E-commerce websites are online platforms where businesses and individuals can buy and sell goods and services. They offer a convenient and efficient way to shop, allowing customers to browse, compare, and purchase products from anywhere with an internet connection. These websites often feature user reviews, personalized recommendations, and secure payment gateways to enhance the shopping experience. Major e-commerce platforms like Amazon and Alibaba have transformed the retail landscape, contributing to the rapid growth of online commerce worldwide.</p>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#registerModal">Let's Get Started</button>
+            </div>
+            <div class="col-md-6">
+                <!-- Image placeholder -->
+                <img src="https://www.photoshopvideotutorial.com/freepsdmock/wp-content/uploads/2020/10/ecommerce1.jpeg" alt="Decorative Image" class="img-fluid">
+            </div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <div class="row about-section">
+            <div class="col-md-6">
+                <h2>About Us</h2>
+                <p>Our platform leverages cutting-edge NLP techniques to analyze customer sentiments across various e-commerce platforms, providing valuable insights into product experiences.</p>
+            </div>
+            <div class="col-md-6">
+                <h2>NLP and Sentiment Analysis</h2>
+                <p>Natural Language Processing (NLP) and sentiment analysis are key technologies in understanding user opinions and feedback by analyzing large amounts of text data.</p>
+            </div>
+        </div>
+        <div class="row analysis-section">
+            <div class="col-3"><div>Positive: <div class="progress"><div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div></div></div></div>
+            <div class="col-3"><div>Negative: <div class="progress"><div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div></div></div></div>
+            <div class="col-3"><div>Neutral: <div class="progress"><div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div></div></div></div>
+            <div class="col-3"><div>Total Sentiment: <div class="progress"><div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">100%</div></div></div></div>
+        </div>
+    </div>
+    <div class="contact-section">
+        <form class="contact-form">
+            <h2>Contact Us</h2>
+            <input type="text" class="form-control mb-3" placeholder="Your name">
+            <input type="email" class="form-control mb-3" placeholder="Your email">
+            <input type="text" class="form-control mb-3" placeholder="Subject">
+            <textarea class="form-control mb-3" placeholder="Message"></textarea>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+        </form>
+    </div>
+</div>
+
+    <!-- Modal for Register Options -->
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Register as Buyer or Seller</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <a href="/register_buyer" class="btn btn-success">Register as Buyer</a>
+                    <a href="/register_seller" class="btn btn-warning">Register as Seller</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
