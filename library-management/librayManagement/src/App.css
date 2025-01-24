@@ -1,0 +1,293 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-style: italic;
+}
+
+/* ---------------- Header Page --------------- */
+
+.header{
+    padding: 1.2rem 4rem;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sign-in-btn{
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.logged-in{
+    padding: 8px 17px;
+    border: none;
+    outline: none;
+    background-color: #de3456;
+    color:white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.sign-up{
+    padding: 8px 13px;
+    border: none;
+    outline: none;
+    background-color: #599acf;
+    color:white;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* ------------- Sign Up Page --------------- */
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f7fa;
+  }
+  
+  .register-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+  }
+  
+  .input-group input:focus {
+    border-color: #007bff;
+  }
+  
+  .register-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .register-btn:hover {
+    background-color: #0056b3;
+  }
+
+  .login-link {
+    margin-bottom: 15px;
+  }
+  
+  .login-link p {
+    font-size: 14px;
+    color: #000;
+    font-weight: 800;
+  }
+  
+  .login-link .link-text {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .login-link .link-text:hover {
+    text-decoration: underline;
+  }
+
+  /* -------------HomePage-------------- */
+
+  .table-container{
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+
+  .book-table {
+    padding: 6px;
+    border-radius: 2px;
+    width: 80%;
+    max-height: 400px;
+    height: 400px;
+    overflow-y: auto;
+    margin: auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+  
+  .book-table::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  
+  .book-table::-webkit-scrollbar-thumb {
+    background-color: #888; 
+    border-radius: 10px; 
+  }
+  
+  .book-table::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+  }
+  
+  table {
+    width: 100%;
+    height: 100%;
+    border-collapse: collapse;
+  }
+  
+  .book-table th, .book-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  .book-table th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  .book-table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .view-btn{
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #0b5daf;
+    color: white;
+  }
+
+  .pagination-container {
+    padding: 10px;
+    margin: 10px 0 0 20px;
+  }
+  
+  .pagination-btn {
+    padding: 8px 12px;
+    margin: 0 5px;
+    border: 1px solid #007bff;
+    background-color: white;
+    color: #007bff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .pagination-btn.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .pagination-btn:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+
+  /* -----------Book Page------------ */
+
+  .book-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+    background-color: #f9f9f9; 
+  }
+  
+  .book-card {
+    padding: 1rem 0rem;
+    width: 600px;
+    height: auto;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .book-details{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    justify-content: space-between;
+  }
+
+  .book-details h1{
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .btn-details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+  }
+
+  .borrow-btn{
+    border-radius: 4px;
+    padding: 8px 16px;
+    background-color: #031852;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .go-back-btn{
+    border-radius: 4px;
+    padding: 8px 16px;
+    border: 2px solid #031852;
+    background-color: rgb(231, 221, 221);
+    color: #031852;
+    outline: none;
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  .go-back-btn:hover{
+    background-color: #031852;
+    color: #fff;
+  }
+  
+  
+  
+  
