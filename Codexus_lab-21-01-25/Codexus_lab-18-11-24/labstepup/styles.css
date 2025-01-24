@@ -1,0 +1,33 @@
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+}
+
+.card img {
+    width: 50px;
+    margin-bottom: 10px;
+}
+
+.card h6 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.card p {
+    font-size: 12px;
+}
+
+#calendar {
+    margin-top: 10px;
+    height: 250px; /* Adjust height as needed */
+    background-color: #e9ecef; /* Just a placeholder, implement your calendar here */
+}
+
+.card-body h6 span {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.float-end {
+    float: right;
+}

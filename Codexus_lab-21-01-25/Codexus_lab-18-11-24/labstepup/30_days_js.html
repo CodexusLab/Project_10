@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Interview Questions</title>
+    <link rel="shortcut icon" type="png" href="logoG copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        
+        :root {
+            --primary: #0284c7;
+            --secondary: #64748b;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background: var(--bg-light);
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            /* background: white; */
+            padding: 2rem;
+            border-radius: 12px;
+            /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .difficulty-badge {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            color: white;
+        }
+
+        .difficulty-easy {
+            background: var(--success);
+        }
+
+        .difficulty-medium {
+            background: var(--warning);
+        }
+
+        .difficulty-hard {
+            background: var(--danger);
+        }
+
+        .question-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: white;
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+        }
+
+        .key-points {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .key-points li {
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .checklist li i {
+            color: var(--success);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+
+            .question-header {
+                flex-direction: column;
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .nav-box {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 0.5rem;
+        }
+
+        .nav-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-box {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 8px 0;
+            font-weight: 600;
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 16px 0;
+            /* Adjusts space between questions */
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header" style="display: flex; align-items: center; position: fixed; top: 0; left: 0; width: 100%; padding: 10px; box-sizing: border-box; gap: 0; background-color: white; z-index: 1000;">
+        <a href="codexuslabs.html" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logonew.png" alt="Logo" style="max-height: 30px; margin-right: 10px;">
+            <h1 class="display-4" style="margin: 0; color: black; font-size: 1.5rem; font-weight: 700;">Codexus Labs</h1>
+        </a>
+    </div>
+    
+    <style>
+        /* Styling for the spacer */
+        .spacer {
+            margin-top: 5rem; /* Adds space between the two sections */
+        }
+    
+        /* Media query for mobile devices */
+        @media (max-width: 767px) {
+            .display-4 {
+                font-size: 1.2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        
+        /* Responsive font size adjustments for tablets and desktops */
+        @media (min-width: 768px) {
+            .display-4 {
+                font-size: 2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .display-4 {
+                font-size: 2.5rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+    </style>
+
+    <div class="spacer"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>JavaScript Interview Questions</h1><br>
+            <div class="pythonlogo-container">
+                <img class="pythonlogo" src="htmlcssjss.png" width="450" height="250" alt="JavaScript Logo" /><br>
+            </div>
+           <br> <p class="lead mb-0">Comprehensive guide to popular JavaScript interview questions</p>
+        </div>
+
+        <div class="nav-container">
+            <div class="nav-box" id="real-time-projects">
+                <i class="fas fa-folder nav-icon"></i><br>
+                <span>Real-Time Projects</span>
+            </div>
+            <div class="nav-box" id="interview-questions">
+                <i class="fas fa-book nav-icon"></i><br>
+                <span>Interview Questions</span>
+            </div>
+        </div>
+
+        <!-- Beginner Level -->
+        <div class="section">
+            <h2 class="section-title" id="beginner-level">
+                <i class="fas fa-leaf"></i>
+                Beginner Level
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Explain "Hoisting" in JavaScript</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Concepts</span>
+                    <span class="tag">Variables</span>
+                    <span class="tag">Scope</span>
+                </div>
+                <ul class="key-points">
+                    <li>Variable and function declaration behavior</li>
+                    <li>Understanding "temporal dead zone"</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Differentiate between "==" and "===" in JavaScript</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Operators</span>
+                    <span class="tag">Type Conversion</span>
+                </div>
+                <ul class="key-points">
+                    <li>Type coercion with "=="</li>
+                    <li>Strict equality with "==="</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Intermediate Level -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                Intermediate Level
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Explain Closures in JavaScript</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Functions</span>
+                    <span class="tag">Scope</span>
+                    <span class="tag">Closures</span>
+                </div>
+                <ul class="key-points">
+                    <li>Lexical scoping and nested functions</li>
+                    <li>Use cases: data hiding, function factories</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">What is Event Delegation in JavaScript?</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Events</span>
+                    <span class="tag">DOM Manipulation</span>
+                </div>
+                <ul class="key-points">
+                    <li>Event handling efficiency</li>
+                    <li>Reducing memory footprint</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Advanced Level -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-bolt"></i>
+                Advanced Level
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Explain the "this" Keyword in JavaScript</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Context</span>
+                    <span class="tag">Functions</span>
+                    <span class="tag">Binding</span>
+                </div>
+                <ul class="key-points">
+                    <li>Global, object, and function context</li>
+                    <li>Arrow functions and lexical "this"</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Explain Asynchronous JavaScript (Promises, Async/Await)</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Asynchronous Programming</span>
+                    <span class="tag">Promises</span>
+                    <span class="tag">Async/Await</span>
+                </div>
+                <ul class="key-points">
+                    <li>Handling asynchronous code with promises</li>
+                    <li>Using async/await for readability</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interview Checklist Section -->
+        <div class="section">
+            <h2 class="section-title" id="interview-checklist">
+                <i class="fas fa-clipboard-check"></i>
+                Interview Checklist
+            </h2>
+            <ul>
+                <li>
+                    <div class="question">1. Explain the use of "this" in JavaScript<i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: The "this" keyword refers to the current context, which can vary based on function invocation.</div>
+                </li>
+                <li>
+                    <div class="question">2. Explain the Prototype Chain<i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: JavaScript uses prototype-based inheritance, allowing objects to inherit properties from other objects.</div>
+                </li>
+                <li>
+                    <div class="question">3. What are Callbacks, Promises, and Async/Await?<i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Callbacks allow functions to be passed as arguments; promises handle asynchronous events, and async/await makes async code more readable.</div>
+                </li>
+                <li>
+                    <div class="question">4. Explain Event Bubbling and Capturing<i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Event bubbling and capturing describe the event propagation phases, controlling how events are handled in the DOM.</div>
+                </li>
+                <li><div class="question">5. What are arrow functions? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Shorter syntax for function expressions, with no binding to 'this'.</div>
+                </li>
+                <li><div class="question">6. Explain async/await. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Syntax for handling asynchronous operations, making code easier to read.</div>
+                </li>
+                <li><div class="question">7. What is destructuring? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Allows extraction of properties from objects and arrays.</div>
+                </li>
+                <li><div class="question">8. How does 'this' keyword work in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Refers to the object it belongs to, behavior depends on function call context.</div>
+                </li>
+                <li><div class="question">9. What are JavaScript promises? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Handle async operations, with states: pending, fulfilled, rejected.</div>
+                </li>
+                <li><div class="question">10. Explain the concept of scope in JavaScript. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Refers to accessibility of variables, objects, functions in code.</div>
+                </li>
+                <li><div class="question">11. Explain JavaScript callbacks. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Function passed into another function to be executed later.</div>
+                </li>
+                <li><div class="question">12. Explain the difference between map and forEach. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: map returns a new array, forEach does not return anything.</div>
+                </li>
+                <li><div class="question">13. What is JSON and how is it used in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Format for structuring data, used for data exchange between server and web app.</div>
+                </li>
+                <li><div class="question">14. What is event delegation? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Technique to handle events at a higher level in the DOM.</div>
+                </li>
+                <li><div class="question">15. Explain JavaScript currying. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Technique to transform a function with multiple args into a series of functions with a single argument.</div>
+                </li>
+                <li><div class="question">16. What are Higher Order Functions? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Functions that take other functions as arguments or return them.</div>
+                </li>
+                <li><div class="question">17. How does error handling work in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: try...catch statement is used to handle exceptions.</div>
+                </li>
+                <li><div class="question">18. What is a generator function? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Function that can pause execution and yield control back.</div>
+                </li>
+                <li><div class="question">19. Explain prototype chain. <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Mechanism by which JavaScript objects inherit properties from other objects.</div>
+                </li>
+                <li><div class="question">20. What is debouncing? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Technique to limit the rate at which a function is executed.</div>
+                </li>
+                <li><div class="question">21. What is throttling? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Limits the number of times a function can execute over time.</div>
+                </li>
+                <li><div class="question">22. What is DOM manipulation in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Techniques to create, delete, and modify elements in the DOM.</div>
+                </li>
+                <li><div class="question">23. What is 'strict mode' in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Enables strict syntax to catch errors and ensure cleaner code.</div>
+                </li>
+                <li><div class="question">24. What are IIFEs in JavaScript? <i class="fas fa-chevron-circle-down toggle-icon"></i></div>
+                    <div class="answer">Answer: Immediately Invoked Function Expressions to execute code right after defining.</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    // JavaScript for smooth scroll to Interview Questions section
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("interview-questions").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("interview-checklist").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("real-time-projects").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("beginner-level").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+
+    document.querySelectorAll('.toggle-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                this.classList.replace('fa-chevron-circle-up', 'fa-chevron-circle-down');
+            } else {
+                answer.style.display = 'block';
+                this.classList.replace('fa-chevron-circle-down', 'fa-chevron-circle-up');
+            }
+        });
+    });
+</script>
+
+</html>

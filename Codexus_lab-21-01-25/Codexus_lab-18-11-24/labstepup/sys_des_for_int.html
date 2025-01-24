@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Design Interview Questions</title>
+    <link rel="shortcut icon" type="png" href="logoG copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <style>
+        
+
+        :root {
+            --primary: #0284c7;
+            --secondary: #64748b;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background: var(--bg-light);
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            /* background: white; */
+            padding: 2rem;
+            border-radius: 12px;
+            /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .difficulty-badge {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            color: white;
+        }
+
+        .difficulty-easy {
+            background: var(--success);
+        }
+
+        .difficulty-medium {
+            background: var(--warning);
+        }
+
+        .difficulty-hard {
+            background: var(--danger);
+        }
+
+        .question-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: white;
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+        }
+
+        .key-points {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .key-points li {
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .checklist li i {
+            color: var(--success);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+
+            .question-header {
+                flex-direction: column;
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .nav-box {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 0.5rem;
+        }
+
+        .nav-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-box {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 8px 0;
+            font-weight: 600;
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 16px 0;
+            /* Adjusts space between questions */
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" style="display: flex; align-items: center; position: fixed; top: 0; left: 0; width: 100%; padding: 10px; box-sizing: border-box; gap: 0; background-color: white; z-index: 1000;">
+        <a href="codexuslabs.html" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logonew.png" alt="Logo" style="max-height: 30px; margin-right: 10px;">
+            <h1 class="display-4" style="margin: 0; color: black; font-size: 1.5rem; font-weight: 700;">Codexus Labs</h1>
+        </a>
+    </div>
+    
+    <style>
+        /* Styling for the spacer */
+        .spacer {
+            margin-top: 3rem; /* Adds space between the two sections */
+        }
+    
+        /* Media query for mobile devices */
+        @media (max-width: 767px) {
+            .display-4 {
+                font-size: 1.2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        
+        /* Responsive font size adjustments for tablets and desktops */
+        @media (min-width: 768px) {
+            .display-4 {
+                font-size: 2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .display-4 {
+                font-size: 2.5rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+    </style>
+
+    <div class="spacer"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>System Design Interview Questions</h1>
+            <!-- Python Logo Section -->
+            <div class="pythonlogo-container">
+                <img class="pythonlogo" src="systemdesignlogo-.png" width="400" height="250" alt="System Design Logo" />
+            </div>
+            <p class="lead mb-0">Comprehensive guide to popular system design interview questions</p>
+        </div>
+        <!-- Button Section -->
+        <div class="nav-container">
+            <div class="nav-box" id="real-time-projects">
+                <i class="fas fa-folder nav-icon"></i><br>
+                <span>Real time Projects</span>
+            </div>
+            <div class="nav-box" id="interview-questions">
+                <i class="fas fa-book nav-icon"></i><br>
+                <span>Interview Questions</span>
+            </div>
+        </div>
+
+        
+
+
+
+        <!-- Easy Questions Section -->
+        <div class="section">
+            <h2 class="section-title" id="beginner-level">
+                <i class="fas fa-leaf"></i>
+                Beginner Level
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design a URL Shortening Service (like TinyURL)</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Hash Functions</span>
+                    <span class="tag">Database</span>
+                    <span class="tag">Rate Limiting</span>
+                </div>
+                <ul class="key-points">
+                    <li>URL shortening and redirection</li>
+                    <li>Handling collisions in hash generation</li>
+                    <li>Analytics and tracking</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design a Parking Lot System</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">OOP Design</span>
+                    <span class="tag">Database Schema</span>
+                    <span class="tag">Concurrency</span>
+                </div>
+                <ul class="key-points">
+                    <li>Multiple parking spot types</li>
+                    <li>Payment processing</li>
+                    <li>Spot allocation strategy</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Medium Questions Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                Intermediate Level
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design Instagram</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">CDN</span>
+                    <span class="tag">Media Storage</span>
+                    <span class="tag">Feed Generation</span>
+                </div>
+                <ul class="key-points">
+                    <li>Photo storage and distribution</li>
+                    <li>News feed implementation</li>
+                    <li>Social graph data model</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design Twitter</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Real-time</span>
+                    <span class="tag">Feed Generation</span>
+                    <span class="tag">Social Graph</span>
+                </div>
+                <ul class="key-points">
+                    <li>Timeline generation</li>
+                    <li>Tweet fanout</li>
+                    <li>Trending topics</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Hard Questions Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-bolt"></i>
+                Advanced Level
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design Google Drive</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">File Storage</span>
+                    <span class="tag">Sync</span>
+                    <span class="tag">Collaboration</span>
+                </div>
+                <ul class="key-points">
+                    <li>File storage and synchronization</li>
+                    <li>Conflict resolution</li>
+                    <li>Permission management</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Design a Global Video Streaming Platform</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">Video Processing</span>
+                    <span class="tag">CDN</span>
+                    <span class="tag">Global Scale</span>
+                </div>
+                <ul class="key-points">
+                    <li>Video transcoding and storage</li>
+                    <li>Global content delivery</li>
+                    <li>Adaptive bitrate streaming</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interview Checklist Section -->
+        <div class="section">
+            <h2 class="section-title" id="interview-checklist">
+                <i class="fas fa-clipboard-check"></i>
+                Interview Checklist
+            </h2>
+            <ul>
+                <li>
+                    <div class="question">
+                        1. Design a URL shortener
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use a key-value database like Redis to store shortened URL keys and map
+                        them to original URLs.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        2. Design a cache system
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use a caching layer like Redis or Memcached to store frequently accessed
+                        data for faster access.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        3. Design a load balancer
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Distribute incoming network traffic across multiple servers to ensure
+                        availability and reliability of applications.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        4. Design a message queue system
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use a system like RabbitMQ or Kafka to manage and store messages between
+                        services, ensuring data is transmitted efficiently.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        5. Design a distributed file storage system
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use systems like HDFS or Amazon S3 to store data across multiple
+                        servers, ensuring durability and accessibility.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        6. Design a rate limiter
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Implement a system to limit the number of requests a user can make in a
+                        specific time period to protect services from overload.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        7. Design an API rate limiting mechanism
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use token buckets or leaky bucket algorithms to control API call limits
+                        and maintain performance.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        8. Design a notification system
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use message queues and services like Firebase or Twilio to send
+                        notifications to users via various channels.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        9. Design a social media feed
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Create a system that ranks, filters, and displays user-generated content
+                        using caching, ranking algorithms, and pagination.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        10. Design an online code editor
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Build a system that compiles and executes code in a sandboxed
+                        environment, ensuring security and performance.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        11. Design a search engine
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use indexing, ranking algorithms, and crawlers to efficiently retrieve
+                        and display relevant search results.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        12. Design a video streaming platform
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Utilize CDN, adaptive streaming, and buffering techniques to deliver
+                        video content with low latency and high availability.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        13. Design a payment gateway system
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use a secure system with payment processors, fraud detection, and proper
+                        handling of sensitive user information.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        14. Design a database sharding mechanism
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Distribute large databases across multiple servers based on keys to
+                        improve performance and scalability.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        15. Design a real-time chat application
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use WebSockets for instant communication, message queues for load
+                        management, and databases to store message history.</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select the button and the target section
+        document.getElementById("interview-questions").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent any default behavior
+            document.getElementById("interview-checklist").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Select the "Real time Projects" button and the target section
+        document.getElementById("real-time-projects").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent any default behavior
+            document.getElementById("beginner-level").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+</script>
+<script>
+    document.querySelectorAll('.toggle-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                this.classList.replace('fa-chevron-circle-up', 'fa-chevron-circle-down');
+            } else {
+                answer.style.display = 'block';
+                this.classList.replace('fa-chevron-circle-down', 'fa-chevron-circle-up');
+            }
+        });
+    });
+</script>
+
+
+</html>

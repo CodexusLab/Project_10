@@ -1,0 +1,258 @@
+body {
+  background: linear-gradient(45deg, #2c9195, #1a7377, #0b555a);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 4rem;
+}
+
+.logo img {
+  height: 120px;
+  width: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.login-icon svg {
+  font-size: 44px;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* -------------- Home Page Button Design-------------- */
+
+.main-container {
+  padding: 0.5rem 2rem;
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.multiple-btn {
+  width: 20%;
+  height: 300px;
+  margin-top: 80px;
+}
+
+.side-btn {
+  width: 80%;
+  height: 40px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.side-btn button {
+  padding: 10px 28px 10px 8px;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 15px;
+  font-weight: 700;
+  background-color: #fff;
+  color: #e4e712;
+  cursor: pointer;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+}
+
+.content-container {
+  background-color: #fff;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+  height: 500px;
+  width: 80%;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+  overflow-y: auto;
+}
+
+.content-container h2 {
+  color: #0b555a;
+  font-size: 14px;
+}
+
+.count {
+  font-size: 24px;
+}
+
+/* Admin Styles */
+
+.doctorlist {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  gap: 30px;
+}
+
+.doctorlist li {
+  list-style: none;
+  background-color: #e4e712;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  position: relative;
+  cursor: pointer;
+}
+
+.doctorlist li::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  cursor: pointer;
+  background-color: #0b555a;
+  transition: width 0.3s ease;
+}
+
+.doctorlist li:hover::after {
+  width: 100%;
+  cursor: pointer;
+}
+
+.admin-content {
+  height: 400px;
+  width: 100%;
+}
+
+/* create doctor form  */
+
+.create-doctor-form {
+  width: 90%;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.create-doctor-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #0b555a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #4a7a7e;
+}
+
+/* All Doctor Table */
+
+.add-page {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-bottom: 10px;
+}
+
+.add-btn {
+  padding: 12px 16px;
+  border-radius: 4px;
+  background-color: #031852;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.admin-table-container {
+  margin-top: 1rem;
+}
+
+.admin-doctor-table {
+  padding: 6px;
+  border-radius: 2px;
+
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.admin-doctor-table::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.admin-doctor-table::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.admin-doctor-table::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+table {
+  width: 100%;
+  height: 100%;
+  border-collapse: collapse;
+}
+
+.admin-doctor-table th,
+.admin-doctor-table td {
+  padding: 12px 15px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.admin-doctor-table th {
+  background-color: #007bff;
+  color: #fff;
+  font-weight: bold;
+}
+
+.admin-doctor-table tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+.delete-btn {
+  padding: 6px 18px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #0b5daf;
+  color: white;
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode Style Reward Notification</title>
+    <link rel="shortcut icon" type="png" href="logoG copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            background: #f8f9fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .reward-notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            opacity: 0;
+            animation: showNotification 4s ease-in-out forwards;
+        }
+
+        .reward-notification i {
+            margin-right: 10px;
+            font-size: 18px;
+            color: #ffd700; /* Gold color */
+            animation: rotateCoin 2s linear infinite;
+        }
+
+        @keyframes rotateCoin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes showNotification {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+
+            10% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            90% {
+                opacity: 1;
+                transform: translate(-50%, 0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(-50%, -20px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="reward-notification">
+        <i class="fas fa-coins"></i>
+        1 Coin Added
+    </div>
+
+</body>
+
+</html>

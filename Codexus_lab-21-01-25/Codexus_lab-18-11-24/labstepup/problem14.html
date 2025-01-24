@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find First and Last Position of Element in Sorted Array</title>
+    <link rel="shortcut icon" type="png" href="logoG copy.png">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/theme/monokai.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        body.dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+        }
+
+        h2, h5 {
+            color: #343a40;
+        }
+
+        body.dark-mode h2, body.dark-mode h5 {
+            color: #f8f9fa;
+        }
+
+        .code-editor {
+            font-family: monospace;
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            resize: none;
+            color: #212529;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode .code-editor {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+
+        pre {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            padding: 10px;
+            color: #212529;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode pre {
+            background-color: #212529;
+            color: #f8f9fa;
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .description-section {
+            animation: fadeInLeft 1s;
+        }
+
+        .code-section {
+            animation: fadeInRight 1s;
+        }
+
+        .btn-primary {
+            background-color: #28a745;
+            border-color: #28a745;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
+
+        .btn-run i {
+            font-size: 1.25em;
+            color: white;
+            margin-right: 5px;
+        }
+
+        .dropdown {
+            display: inline-block;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        #language {
+            padding: 5px;
+            font-size: 14px;
+        }
+
+        #theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: #28a745;
+            border: 2px solid #28a745;
+            border-radius: 12px;
+            padding: 5px;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.5em;
+            transition: background-color 0.3s, color 0.3s, border 0.3s;
+        }
+
+        #theme-toggle.dark-mode {
+            background-color: #343a40;
+            color: #f8f9fa;
+            border-color: #f8f9fa;
+        }
+
+        .colorful-output {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            #theme-toggle {
+                top: 10px;
+                right: 10px;
+                font-size: 1.2em;
+                padding: 8px;
+            }
+
+            .code-editor {
+                font-size: 0.875em;
+            }
+
+            .container {
+                margin-top: 30px;
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .diagram {
+            margin-top: 20px;
+        }
+
+        .diagram img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header" style="display: flex; align-items: center; position: fixed; top: 0; left: 0; width: 100%; padding: 10px; box-sizing: border-box; gap: 0; background-color: white; z-index: 1000;">
+        <a href="codexuslabs.html" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logonew.png" alt="Logo" style="max-height: 30px; margin-right: 10px;">
+            <h1 class="display-4" style="margin: 0; color: black; font-size: 1.5rem; font-weight: 700;">Codexus Labs</h1>
+        </a>
+    </div>
+    
+    <style>
+        /* Styling for the spacer */
+        .spacer {
+            margin-top: 5rem; /* Adds space between the two sections */
+        }
+    
+        /* Media query for mobile devices */
+        @media (max-width: 767px) {
+            .display-4 {
+                font-size: 1.2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        
+        /* Responsive font size adjustments for tablets and desktops */
+        @media (min-width: 768px) {
+            .display-4 {
+                font-size: 2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .display-4 {
+                font-size: 2.5rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+    </style>
+
+    <div class="spacer"></div>
+
+    
+    <button id="theme-toggle" class="btn">
+        <i class="fas fa-moon"></i>
+    </button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 description-section">
+                <h2 class="animate__animated animate__fadeInLeft"><i class="fas fa-file-alt"></i> 20. Find First and Last Position of Element in Sorted Array</h2>
+                <p>Given a sorted array of integers and a target value, return the starting and ending position of the target value in the array. If the target is not found, return [-1, -1].</p>
+                <h5 class="animate__animated animate__fadeInLeft"><i class="fas fa-lightbulb"></i> Example:</h5>
+                <pre><code>Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3, 4]</code></pre>
+                <p class="diagram">Here's a visual representation of the problem:</p>
+                <img src="https://i.imgur.com/Wk2RxPA.png" alt="Example Diagram" class="diagram">
+                <h5 class="animate__animated animate__fadeInLeft"><i class="fas fa-check-circle"></i> Constraints:</h5>
+                <ul>
+                    <li>The array is sorted in non-decreasing order.</li>
+                    <li>The length of the array is between <code>1</code> and <code>10^5</code>.</li>
+                    <li>All elements of the array are between <code>-10^9</code> and <code>10^9</code>.</li>
+                </ul>
+            </div>
+            <div class="col-md-6 code-section">
+                <h5 class="animate__animated animate__fadeInRight"><i class="fas fa-code"></i> Code</h5>
+                <div class="dropdown">
+                    <select id="language" class="form-control animate__animated animate__fadeInRight">
+                        <option value="python">Python</option>
+                        <option value="python3">Python 3</option>
+                    </select>
+                </div>
+                <button id="run" class="btn btn-primary btn-run animate__animated animate__fadeInRight">
+                    <i class="fas fa-play-circle"></i>
+                </button>
+                <div id="code-editor" class="code-editor animate__animated animate__fadeInRight mt-3"></div>
+                <h5 class="mt-3 animate__animated animate__fadeInRight"><i class="fas fa-terminal"></i> Output</h5>
+                <pre id="output" class="colorful-output"></pre>
+                <h5 class="animate__animated animate__fadeInRight"><i class="fas fa-vial"></i> Testcase</h5>
+                <input type="text" id="input" class="form-control animate__animated animate__fadeInRight" placeholder="[5,7,7,8,8,10], 8">
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/mode/python/python.min.js"></script>
+    <script>
+        let editor = CodeMirror(document.getElementById('code-editor'), {
+            mode: 'python',
+            theme: 'monokai',
+            lineNumbers: true,
+            tabSize: 4,
+            indentUnit: 4,
+            autofocus: true,
+            value: `def searchRange(nums, target):
+    def findPosition(nums, target, findFirst):
+        left, right = 0, len(nums) - 1
+        pos = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                pos = mid
+                if findFirst:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return pos
+
+    first = findPosition(nums, target, True)
+    last = findPosition(nums, target, False)
+    return [first, last]`
+        });
+
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            let body = document.body;
+            let isDarkMode = body.classList.toggle('dark-mode');
+            this.classList.toggle('dark-mode', isDarkMode);
+            editor.setOption('theme', isDarkMode ? 'monokai' : 'default');
+        });
+
+        document.getElementById('language').addEventListener('change', function () {
+            let language = this.value;
+            if (language === 'python') {
+                editor.setValue(`def searchRange(nums, target):
+    def findPosition(nums, target, findFirst):
+        left, right = 0, len(nums) - 1
+        pos = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                pos = mid
+                if findFirst:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return pos
+
+    first = findPosition(nums, target, True)
+    last = findPosition(nums, target, False)
+    return [first, last]`);
+                editor.setOption('mode', 'python');
+            } else if (language === 'python3') {
+                editor.setValue(`def searchRange(nums, target):
+    def findPosition(nums, target, findFirst):
+        left, right = 0, len(nums) - 1
+        pos = -1
+        while left <= right:
+            mid = (left + right) // 2
+            if nums[mid] == target:
+                pos = mid
+                if findFirst:
+                    right = mid - 1
+                else:
+                    left = mid + 1
+            elif nums[mid] < target:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return pos
+
+    first = findPosition(nums, target, True)
+    last = findPosition(nums, target, False)
+    return [first, last]`);
+                editor.setOption('mode', 'python');
+            }
+        });
+
+        document.getElementById('run').addEventListener('click', function () {
+            let userInput = document.getElementById('input').value;
+            let output = '';
+
+            try {
+                let input = JSON.parse(userInput);
+                let nums = input[0];
+                let target = input[1];
+                let language = document.getElementById('language').value;
+                let code = editor.getValue();
+
+                if (language === 'python') {
+                    eval(code);
+                    output = searchRange(nums, target);
+                } else if (language === 'python3') {
+                    eval(code);
+                    output = searchRange(nums, target);
+                }
+                document.getElementById('output').textContent = 'Output: ' + JSON.stringify(output);
+            } catch (error) {
+                document.getElementById('output').innerHTML = '<span style="color:red">Error: ' + error.message + '</span>';
+            }
+        });
+    </script>
+</body>
+
+</html>

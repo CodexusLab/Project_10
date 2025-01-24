@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SQL Interview Questions</title>
+    <link rel="shortcut icon" type="png" href="logoG copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <style>
+        
+        :root {
+            --primary: #0284c7;
+            --secondary: #64748b;
+            --success: #059669;
+            --warning: #d97706;
+            --danger: #dc2626;
+            --bg-light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        body {
+            background: var(--bg-light);
+            font-family: system-ui, -apple-system, sans-serif;
+            color: #1e293b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+            /* background: white; */
+            padding: 2rem;
+            border-radius: 12px;
+            /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); */
+        }
+
+        .header h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .difficulty-badge {
+            font-size: 0.875rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            color: white;
+        }
+
+        .difficulty-easy {
+            background: var(--success);
+        }
+
+        .difficulty-medium {
+            background: var(--warning);
+        }
+
+        .difficulty-hard {
+            background: var(--danger);
+        }
+
+        .question-card {
+            background: var(--bg-light);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .question-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .tag-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .tag {
+            background: white;
+            color: var(--secondary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            border: 1px solid var(--border);
+        }
+
+        .key-points {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .key-points li {
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 1rem;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .checklist li i {
+            color: var(--success);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 1rem auto;
+            }
+
+            .question-header {
+                flex-direction: column;
+            }
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .nav-box {
+            flex: 1;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin: 0 0.5rem;
+        }
+
+        .nav-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .nav-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-box {
+                margin: 0.5rem 0;
+                width: 100%;
+            }
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 8px 0;
+            font-weight: 600;
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .question {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin: 16px 0;
+            /* Adjusts space between questions */
+        }
+
+        .answer {
+            display: none;
+            padding-left: 24px;
+            color: #555;
+        }
+
+        .toggle-icon {
+            margin-left: auto;
+            font-size: 1.2em;
+            color: #007bff;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header" style="display: flex; align-items: center; position: fixed; top: 0; left: 0; width: 100%; padding: 10px; box-sizing: border-box; gap: 0; background-color: white; z-index: 1000;">
+        <a href="codexuslabs.html" style="display: flex; align-items: center; text-decoration: none;">
+            <img src="logonew.png" alt="Logo" style="max-height: 30px; margin-right: 10px;">
+            <h1 class="display-4" style="margin: 0; color: black; font-size: 1.5rem; font-weight: 700;">Codexus Labs</h1>
+        </a>
+    </div>
+    
+    <style>
+        /* Styling for the spacer */
+        .spacer {
+            margin-top: 5rem; /* Adds space between the two sections */
+        }
+    
+        /* Media query for mobile devices */
+        @media (max-width: 767px) {
+            .display-4 {
+                font-size: 1.2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        
+        /* Responsive font size adjustments for tablets and desktops */
+        @media (min-width: 768px) {
+            .display-4 {
+                font-size: 2rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            .display-4 {
+                font-size: 2.5rem;
+                margin-bottom: 5rem;
+            }
+            .spacer {
+                margin-top: 5rem;
+            }
+        }
+    </style>
+
+    <div class="spacer"></div>
+
+    <div class="container">
+        <div class="header">
+            <h1>SQL Interview Questions</h1>
+            <!-- Logo Section -->
+            <div class="logo-container">
+                <img class="logo" src="sqllogonew.png" width="400" height="250" alt="SQL Logo" />
+            </div>
+            <p class="lead mb-0">Comprehensive guide to popular SQL interview questions</p>
+        </div>
+
+        <!-- Button Section -->
+        <div class="nav-container">
+            <div class="nav-box" id="real-time-projects">
+                <i class="fas fa-folder nav-icon"></i><br>
+                <span>SQL Projects</span>
+            </div>
+            <div class="nav-box" id="interview-questions">
+                <i class="fas fa-book nav-icon"></i><br>
+                <span>SQL Topics Questions</span>
+            </div>
+        </div>
+
+        <!-- Beginner Questions Section -->
+        <div class="section">
+            <h2 class="section-title" id="beginner-level">
+                <i class="fas fa-leaf"></i>
+                Beginner Level
+                <span class="difficulty-badge difficulty-easy">Easy</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Basic SQL Queries</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Queries</span>
+                </div>
+                <ul class="key-points">
+                    <li>Understand SELECT, FROM, WHERE clauses</li>
+                    <li>Practice filtering and sorting data</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Table Joins</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Joins</span>
+                </div>
+                <ul class="key-points">
+                    <li>Learn INNER JOIN, LEFT JOIN, RIGHT JOIN</li>
+                    <li>Understand use cases for each join type</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Intermediate Questions Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                Intermediate Level
+                <span class="difficulty-badge difficulty-medium">Medium</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Subqueries and Nested Queries</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Subqueries</span>
+                </div>
+                <ul class="key-points">
+                    <li>Understand how to use subqueries</li>
+                    <li>Use subqueries within SELECT, FROM, WHERE clauses</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Window Functions</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Window Functions</span>
+                </div>
+                <ul class="key-points">
+                    <li>Learn about ROW_NUMBER, RANK, and PARTITION BY</li>
+                    <li>Understand their applications in data analysis</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Advanced Questions Section -->
+        <div class="section">
+            <h2 class="section-title">
+                <i class="fas fa-bolt"></i>
+                Advanced Level
+                <span class="difficulty-badge difficulty-hard">Hard</span>
+            </h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">Recursive CTEs</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">CTEs</span>
+                    <span class="tag">Recursion</span>
+                </div>
+                <ul class="key-points">
+                    <li>Understand Common Table Expressions</li>
+                    <li>Practice recursive queries for hierarchical data</li>
+                </ul>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <h3 class="question-title">SQL Performance Optimization</h3>
+                </div>
+                <div class="tag-container">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Optimization</span>
+                    <span class="tag">Indexes</span>
+                </div>
+                <ul class="key-points">
+                    <li>Understand indexing, query optimization</li>
+                    <li>Analyze and optimize complex queries</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Interview Checklist Section -->
+        <div class="section">
+            <h2 class="section-title" id="interview-checklist">
+                <i class="fas fa-clipboard-check"></i>
+                Interview Checklist
+            </h2>
+            <ul>
+                <li>
+                    <div class="question">
+                        1. Write a Query to Find Duplicates
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use GROUP BY and HAVING COUNT > 1 to find duplicate entries in a table.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        2. Write a Query to Fetch the Second Highest Salary
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use ORDER BY DESC and LIMIT 1 OFFSET 1 to get the second-highest salary.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        3. Explain ACID Properties
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: ACID stands for Atomicity, Consistency, Isolation, and Durability, ensuring reliable transactions.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        4. What is a Primary Key and Foreign Key?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: A Primary Key uniquely identifies each record; a Foreign Key links two tables together.</div>
+                </li>
+                
+                <li>
+                    <div class="question">
+                        5. Write a Query to Find the Number of Employees in Each Department
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use GROUP BY department_id and COUNT(*) to get the employee count per department.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        6. Explain the Difference Between WHERE and HAVING
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: WHERE filters rows before grouping; HAVING filters groups after grouping.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        7. Write a Query to Join Two Tables
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use INNER JOIN, LEFT JOIN, or RIGHT JOIN to retrieve data from multiple tables.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        8. Write a Query to Get Employees Who Joined Last Month
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use DATE_SUB() and BETWEEN to filter for employees who joined last month.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        9. Explain Normalization and Denormalization
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Normalization reduces redundancy by splitting data; denormalization combines tables for faster reads.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        10. Write a Query to Remove Duplicates from a Table
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use ROW_NUMBER() or DELETE with JOIN to remove duplicate rows from a table.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        11. What is the Difference Between DELETE and TRUNCATE?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: DELETE removes rows with a WHERE clause; TRUNCATE deletes all rows quickly but cannot be used with a WHERE clause.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        12. Write a Query to Find the Highest and Lowest Salary
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use MAX(salary) and MIN(salary) to retrieve the highest and lowest salary.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        13. Explain the Concept of an Index
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Indexes improve the speed of data retrieval but can slow down inserts, updates, and deletes.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        14. Write a Query to Display Only Odd or Even Records
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use ROW_NUMBER() with modulo (%) to filter odd/even records.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        15. What is the Difference Between UNION and UNION ALL?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: UNION removes duplicates; UNION ALL includes all duplicates.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        16. Write a Query to Find Employees with Salaries Above Average
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use a subquery to calculate the average salary and filter employees with salaries above this value.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        17. Explain the Difference Between INNER JOIN and OUTER JOIN
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: INNER JOIN returns only matching records; OUTER JOIN returns all records with NULL for non-matches.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        18. Write a Query to List All Table Names in a Database
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use SELECT table_name FROM information_schema.tables to list table names.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        19. What is a View, and How is it Used?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: A view is a virtual table based on a query; it simplifies data access without storing data itself.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        20. Write a Query to Add a Column to an Existing Table
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use ALTER TABLE table_name ADD column_name data_type to add a column.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        21. What is the Difference Between a Primary Key and a Unique Key?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: A primary key uniquely identifies each row and does not allow NULLs; a unique key also enforces uniqueness but can allow NULLs.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        22. Write a Query to Convert Rows to Columns
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use CASE statements or the PIVOT function to convert rows to columns.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        23. Explain the Concept of a Foreign Key Constraint
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: A foreign key constraint enforces a link between two tables, maintaining referential integrity.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        24. Write a Query to Remove a Column from a Table
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use ALTER TABLE table_name DROP COLUMN column_name to remove a column.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        25. What is the Use of the COALESCE Function?
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: COALESCE returns the first non-NULL value in a list of arguments.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        26. Write a Query to Calculate the Total Salary of Employees in Each Department
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use SUM(salary) with GROUP BY department_id to calculate total salary by department.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        27. Explain the Purpose of the EXISTS Keyword
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: EXISTS checks if a subquery returns any rows and is used for efficient conditional checks.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        28. Write a Query to Find the Length of a String
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use LENGTH() function to get the number of characters in a string.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        29. Explain the Difference Between CHAR and VARCHAR
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: CHAR is a fixed-length string, while VARCHAR is a variable-length string up to a specified limit.</div>
+                </li>
+                <li>
+                    <div class="question">
+                        30. Write a Query to Fetch the Top N Records
+                        <i class="fas fa-chevron-circle-down toggle-icon"></i>
+                    </div>
+                    <div class="answer">Answer: Use LIMIT n to get the top N records in MySQL or TOP N in SQL Server.</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("interview-questions").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("interview-checklist").scrollIntoView({ behavior: "smooth" });
+        });
+        document.getElementById("real-time-projects").addEventListener("click", function (event) {
+            event.preventDefault();
+            document.getElementById("beginner-level").scrollIntoView({ behavior: "smooth" });
+        });
+    });
+
+    document.querySelectorAll('.toggle-icon').forEach(icon => {
+        icon.addEventListener('click', function () {
+            const answer = this.parentElement.nextElementSibling;
+            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+            this.classList.toggle('fa-chevron-circle-down');
+            this.classList.toggle('fa-chevron-circle-up');
+        });
+    });
+</script>
+
+</html>
